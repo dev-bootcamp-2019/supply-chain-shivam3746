@@ -27,9 +27,9 @@ contract SupplyChain {
     (declaring them in this order is important for testing)
   */
   enum State{
-  ForSale
-  Sold
-  Shipped
+  ForSale,
+  Sold,
+  Shipped,
   Received
   }
 
