@@ -127,10 +127,10 @@ contract SupplyChain {
     payable
     forSale(sku)
     paidEnough(items[sku].price)
-    checkValue(_sku)
+    checkValue(sku)
 
   {
-    items[sku].seller.transfer(items[_sku].price);
+    items[sku].seller.transfer(items[sku].price);
     items[sku].buyer = msg.sender;
     items[sku].state = State.sold;
     emit Sold(sku);
@@ -142,10 +142,10 @@ contract SupplyChain {
 function shipItem(uint sku)
     public
     sold(sku)
-    verifyCaller(items[_sku].seller)
+    verifyCaller(items[sku].seller)
 
   {
-   items[_sku].state = State.Shipped;
+   items[sku].state = State.Shipped;
    emit Shipped(sku); 
 }
 
