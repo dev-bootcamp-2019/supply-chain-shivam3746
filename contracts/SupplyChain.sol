@@ -52,7 +52,7 @@ contract SupplyChain {
 
 /* Create a modifer that checks if the msg.sender is the owner of the contract */
  modifier checkOwner() {
-   require (msg.sender == _owner, "Caller is not the owner.");
+   require (msg.sender == owner, "Caller is not the owner.");
    _;
 }
 
