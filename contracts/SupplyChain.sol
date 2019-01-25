@@ -26,12 +26,8 @@ contract SupplyChain {
     Received
     (declaring them in this order is important for testing)
   */
-  enum State{
-  ForSale,
-  Sold,
-  Shipped,
-  Received
-  }
+  enum State { ForSale, Sold, Shipped,Received }
+  State enumStates;
 
   /* Create a struct named Item.
     Here, add a name, sku, price, state, seller, and buyer
@@ -129,38 +125,38 @@ contract SupplyChain {
   function buyItem(uint sku)
     public
     payable
-    forSale(_sku)
-    paidEnough(items[_sku].price)
+    forSale(sku)
+    paidEnough(items[sku].price)
     checkValue(_sku)
 
   {
-    items[_sku].seller.transfer(items[_sku].price);
-    items[_sku].buyer = msg.sender;
-    items[_sku].state = State.sold;
-    emit Sold(_sku);
+    items[sku].seller.transfer(items[_sku].price);
+    items[sku].buyer = msg.sender;
+    items[sku].state = State.sold;
+    emit Sold(sku);
 
 }
 
   /* Add 2 modifiers to check if the item is sold already, and that the person calling this function
   is the seller. Change the state of the item to shipped. Remember to call the event associated with this function!*/
-function shipItem(uint _sku)
+function shipItem(uint sku)
     public
-    sold(_sku)
+    sold(sku)
     verifyCaller(items[_sku].seller)
 
   {
    items[_sku].state = State.Shipped;
-   emit Shipped(_sku); 
+   emit Shipped(sku); 
 }
 
   /* Add 2 modifiers to check if the item is shipped already, and that the person calling this function
   is the buyer. Change the state of the item to received. Remember to call the event associated with this function!*/
   function receiveItem(uint sku)
-    public shipped(_sku)
-    verifyCaller(items[_sku].buyer)
+    public shipped(sku)
+    verifyCaller(items[sku].buyer)
   {
-   items[_sku].state = State.Received;
-    emit Received(_sku);
+   items[sku].state = State.Received;
+    emit Received(sku);
   }
 
   /* We have these functions completed so we can run tests, just ignore it :) */
