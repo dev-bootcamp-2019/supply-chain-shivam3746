@@ -38,7 +38,7 @@ contract SupplyChain {
     We've left you to figure out what the appropriate types are,
     if you need help you can ask around :)
   */
-  struct{
+  struct Item {
   string name;
   uint sku;
   uint price;
